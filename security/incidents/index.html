@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIEM Dashboard - CyberTech Solutions</title>
+    <title>Incident Response - CyberTech Solutions</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../css/security.css">
-    <link rel="stylesheet" href="css/siem.css">
+    <link rel="stylesheet" href="css/incidents.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -35,216 +34,795 @@
         </div>
     </nav>
 
-    <!-- SIEM Header -->
-    <section class="siem-header">
+    <!-- Incident Response Header -->
+    <section class="incident-header">
         <div class="container">
-            <div class="siem-header-content">
-                <h1><i class="fas fa-shield-alt"></i> SIEM Security Operations Center</h1>
-                <p>Real-time security monitoring, threat detection, and incident response</p>
-                <div class="siem-status">
-                    <span class="status-indicator online"></span>
-                    <span>SIEM Online - Monitoring Active</span>
+            <div class="incident-header-content">
+                <h1><i class="fas fa-exclamation-triangle"></i> Incident Response Center</h1>
+                <p>Comprehensive response playbooks, forensic analysis, and lessons learned from real-world cybersecurity incidents.</p>
+                <div class="incident-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-book"></i>
+                        <div>
+                            <h3>25+</h3>
+                            <p>Response Playbooks</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-search"></i>
+                        <div>
+                            <h3>50+</h3>
+                            <p>Forensic Cases</p>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div>
+                            <h3>100+</h3>
+                            <p>Lessons Learned</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SIEM Dashboard -->
-    <section class="siem-dashboard">
+    <!-- Response Playbooks Section -->
+    <section class="playbooks-section">
         <div class="container">
-            <!-- Dashboard Controls -->
-            <div class="dashboard-controls">
-                <div class="control-group">
-                    <label for="timeRange">Time Range:</label>
-                    <select id="timeRange">
-                        <option value="1h">Last Hour</option>
-                        <option value="24h" selected>Last 24 Hours</option>
-                        <option value="7d">Last 7 Days</option>
-                        <option value="30d">Last 30 Days</option>
-                    </select>
-                </div>
-                <div class="control-group">
-                    <label for="severityFilter">Severity:</label>
-                    <select id="severityFilter">
-                        <option value="all">All Severities</option>
-                        <option value="critical">Critical</option>
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
-                    </select>
-                </div>
-                <div class="control-group">
-                    <button id="refreshBtn" class="btn btn-primary">
-                        <i class="fas fa-sync-alt"></i> Refresh
-                    </button>
-                </div>
-            </div>
-
-            <!-- Main Dashboard Grid -->
-            <div class="dashboard-grid">
-                <!-- Security Metrics -->
-                <div class="dashboard-card metrics-card">
-                    <h3><i class="fas fa-chart-line"></i> Security Metrics</h3>
-                    <div class="metrics-grid">
-                        <div class="metric">
-                            <div class="metric-value" id="totalEvents">0</div>
-                            <div class="metric-label">Total Events</div>
+            <h2><i class="fas fa-book"></i> Response Playbooks</h2>
+            <p class="section-intro">Standard operating procedures based on real-world incidents and industry best practices from NIST, SANS, and MITRE frameworks.</p>
+            
+            <div class="playbooks-grid">
+                <!-- Ransomware Response -->
+                <div class="playbook-card critical">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-virus-slash"></i> Ransomware Response</h3>
+                        <span class="severity critical">Critical</span>
+                    </div>
+                    <p>Comprehensive response procedures for ransomware attacks, including containment, eradication, and recovery phases based on Colonial Pipeline and WannaCry incidents.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">Immediate</span>
                         </div>
-                        <div class="metric">
-                            <div class="metric-value critical" id="criticalAlerts">0</div>
-                            <div class="metric-label">Critical Alerts</div>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">8-12 members</span>
                         </div>
-                        <div class="metric">
-                            <div class="metric-value high" id="highAlerts">0</div>
-                            <div class="metric-label">High Alerts</div>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">24-72 hours</span>
                         </div>
-                        <div class="metric">
-                            <div class="metric-value" id="blockedThreats">0</div>
-                            <div class="metric-label">Blocked Threats</div>
-                        </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/ransomware/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/ransomware/download" class="btn btn-secondary">Download PDF</a>
                     </div>
                 </div>
 
-                <!-- Real-time Activity Chart -->
-                <div class="dashboard-card chart-card">
-                    <h3><i class="fas fa-chart-area"></i> Real-time Activity</h3>
-                    <canvas id="activityChart" width="400" height="200"></canvas>
-                </div>
-
-                <!-- Threat Intelligence -->
-                <div class="dashboard-card threat-intel">
-                    <h3><i class="fas fa-eye"></i> Threat Intelligence</h3>
-                    <div class="threat-metrics">
-                        <div class="threat-metric">
-                            <span class="threat-label">Active Threats:</span>
-                            <span class="threat-value" id="activeThreats">0</span>
+                <!-- Supply Chain Attack Response -->
+                <div class="playbook-card critical">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-link"></i> Supply Chain Attack Response</h3>
+                        <span class="severity critical">Critical</span>
+                    </div>
+                    <p>Response procedures for supply chain attacks based on SolarWinds, Kaseya, and Codecov incidents. Includes vendor assessment and containment strategies.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">Immediate</span>
                         </div>
-                        <div class="threat-metric">
-                            <span class="threat-label">Known IPs:</span>
-                            <span class="threat-value" id="knownIPs">0</span>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">10-15 members</span>
                         </div>
-                        <div class="threat-metric">
-                            <span class="threat-label">Malware Detected:</span>
-                            <span class="threat-value" id="malwareDetected">0</span>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">1-4 weeks</span>
                         </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/supply-chain/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/supply-chain/download" class="btn btn-secondary">Download PDF</a>
                     </div>
                 </div>
 
-                <!-- System Status -->
-                <div class="dashboard-card system-status">
-                    <h3><i class="fas fa-server"></i> System Status</h3>
-                    <div class="status-list">
-                        <div class="status-item">
-                            <span class="status-dot online"></span>
-                            <span>SIEM Server</span>
+                <!-- Zero-Day Vulnerability Response -->
+                <div class="playbook-card critical">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-exclamation-circle"></i> Zero-Day Vulnerability Response</h3>
+                        <span class="severity critical">Critical</span>
+                    </div>
+                    <p>Response procedures for zero-day vulnerabilities based on Log4j, PrintNightmare, and ProxyLogon incidents. Includes rapid assessment and mitigation.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">Immediate</span>
                         </div>
-                        <div class="status-item">
-                            <span class="status-dot online"></span>
-                            <span>Log Collectors</span>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">6-10 members</span>
                         </div>
-                        <div class="status-item">
-                            <span class="status-dot online"></span>
-                            <span>Detection Engine</span>
-                        </div>
-                        <div class="status-item">
-                            <span class="status-dot online"></span>
-                            <span>Alert System</span>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">24-48 hours</span>
                         </div>
                     </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/zero-day/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/zero-day/download" class="btn btn-secondary">Download PDF</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Log Search and Analysis -->
-            <div class="search-section">
-                <div class="search-header">
-                    <h3><i class="fas fa-search"></i> Log Search & Analysis</h3>
-                    <div class="search-controls">
-                        <input type="text" id="searchQuery" placeholder="Search logs (e.g., source=firewall, severity=high)" />
-                        <button id="searchBtn" class="btn btn-primary">Search</button>
-                        <button id="advancedSearchBtn" class="btn btn-secondary">Advanced</button>
+                <!-- Data Breach Response -->
+                <div class="playbook-card high">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-database"></i> Data Breach Response</h3>
+                        <span class="severity high">High</span>
+                    </div>
+                    <p>Procedures for responding to data breaches based on Uber, T-Mobile, and Marriott incidents. Includes notification requirements and regulatory compliance.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">4 hours</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">6-10 members</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">1-2 weeks</span>
+                        </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/data-breach/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/data-breach/download" class="btn btn-secondary">Download PDF</a>
                     </div>
                 </div>
-                
-                <div class="search-results">
-                    <div class="results-header">
-                        <span>Search Results</span>
-                        <span id="resultCount">0 results</span>
-                    </div>
-                    <div class="log-table-container">
-                        <table class="log-table" id="logTable">
-                            <thead>
-                                <tr>
-                                    <th>Timestamp</th>
-                                    <th>Source</th>
-                                    <th>Event Type</th>
-                                    <th>Severity</th>
-                                    <th>Message</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="logTableBody">
-                                <!-- Log entries will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Active Alerts -->
-            <div class="alerts-section">
-                <h3><i class="fas fa-exclamation-triangle"></i> Active Alerts</h3>
-                <div class="alerts-container" id="alertsContainer">
-                    <!-- Alerts will be populated here -->
+                <!-- Advanced Persistent Threat (APT) Response -->
+                <div class="playbook-card critical">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-user-secret"></i> APT Response</h3>
+                        <span class="severity critical">Critical</span>
+                    </div>
+                    <p>Response procedures for advanced persistent threats based on APT29, APT41, and Lazarus Group incidents. Includes threat hunting and eradication.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">Immediate</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">12-20 members</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">2-8 weeks</span>
+                        </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/apt/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/apt/download" class="btn btn-secondary">Download PDF</a>
+                    </div>
+                </div>
+
+                <!-- Phishing Response -->
+                <div class="playbook-card medium">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-fish"></i> Phishing Response</h3>
+                        <span class="severity medium">Medium</span>
+                    </div>
+                    <p>Response procedures for phishing attacks based on real-world campaigns. Includes email analysis, user notification, and threat hunting.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">2 hours</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">3-5 members</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">4-8 hours</span>
+                        </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/phishing/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/phishing/download" class="btn btn-secondary">Download PDF</a>
+                    </div>
+                </div>
+
+                <!-- DDoS Response -->
+                <div class="playbook-card high">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-network-wired"></i> DDoS Response</h3>
+                        <span class="severity high">High</span>
+                    </div>
+                    <p>Procedures for responding to distributed denial of service attacks based on real-world incidents. Includes traffic analysis and mitigation.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">Immediate</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">4-6 members</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">2-6 hours</span>
+                        </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/ddos/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/ddos/download" class="btn btn-secondary">Download PDF</a>
+                    </div>
+                </div>
+
+                <!-- Insider Threat Response -->
+                <div class="playbook-card critical">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-user-secret"></i> Insider Threat Response</h3>
+                        <span class="severity critical">Critical</span>
+                    </div>
+                    <p>Procedures for detecting and responding to insider threats based on real-world cases. Includes behavioral analysis and access control.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">Immediate</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">5-8 members</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">1-4 weeks</span>
+                        </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/insider-threat/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/insider-threat/download" class="btn btn-secondary">Download PDF</a>
+                    </div>
+                </div>
+
+                <!-- Malware Response -->
+                <div class="playbook-card high">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-bug"></i> Malware Response</h3>
+                        <span class="severity high">High</span>
+                    </div>
+                    <p>Procedures for responding to malware infections based on real-world incidents. Includes isolation, analysis, and eradication.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">1 hour</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">4-6 members</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">4-12 hours</span>
+                        </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/malware/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/malware/download" class="btn btn-secondary">Download PDF</a>
+                    </div>
+                </div>
+
+                <!-- Cloud Security Incident Response -->
+                <div class="playbook-card high">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-cloud"></i> Cloud Security Incident Response</h3>
+                        <span class="severity high">High</span>
+                    </div>
+                    <p>Response procedures for cloud security incidents based on real-world cases. Includes AWS, Azure, and GCP incident handling.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">2 hours</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">5-8 members</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">8-24 hours</span>
+                        </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/cloud-security/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/cloud-security/download" class="btn btn-secondary">Download PDF</a>
+                    </div>
+                </div>
+
+                <!-- IoT Security Incident Response -->
+                <div class="playbook-card medium">
+                    <div class="playbook-header">
+                        <h3><i class="fas fa-microchip"></i> IoT Security Incident Response</h3>
+                        <span class="severity medium">Medium</span>
+                    </div>
+                    <p>Response procedures for IoT security incidents based on real-world cases. Includes device isolation and network segmentation.</p>
+                    <div class="playbook-details">
+                        <div class="detail-item">
+                            <span class="label">Response Time:</span>
+                            <span class="value">4 hours</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Team Size:</span>
+                            <span class="value">3-6 members</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Duration:</span>
+                            <span class="value">6-12 hours</span>
+                        </div>
+                    </div>
+                    <div class="playbook-actions">
+                        <a href="playbooks/iot-security/" class="btn btn-primary">View Playbook</a>
+                        <a href="playbooks/iot-security/download" class="btn btn-secondary">Download PDF</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Investigation Panel (Hidden by default) -->
-    <div class="investigation-panel" id="investigationPanel">
-        <div class="panel-header">
-            <h3><i class="fas fa-search-plus"></i> Incident Investigation</h3>
-            <button class="close-panel" id="closePanel">&times;</button>
-        </div>
-        <div class="panel-content">
-            <div class="investigation-tabs">
-                <button class="tab-btn active" data-tab="timeline">Timeline</button>
-                <button class="tab-btn" data-tab="evidence">Evidence</button>
-                <button class="tab-btn" data-tab="correlation">Correlation</button>
-                <button class="tab-btn" data-tab="notes">Notes</button>
+    <!-- Forensic Analysis Section -->
+    <section class="forensic-section">
+        <div class="container">
+            <h2><i class="fas fa-search"></i> Forensic Analysis</h2>
+            <p class="section-intro">Comprehensive digital forensics methodologies and real-world case studies for evidence collection, analysis, and preservation.</p>
+            
+            <div class="forensic-grid">
+                <!-- Memory Forensics -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3>Memory Forensics</h3>
+                    <p>Analysis of volatile memory to detect malware, rootkits, and suspicious processes using Volatility and Rekall frameworks.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>APT29 Memory Analysis</li>
+                            <li>Ransomware Process Tracking</li>
+                            <li>Rootkit Detection</li>
+                            <li>Malware Persistence Analysis</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/memory/" class="btn btn-primary">View Analysis</a>
+                </div>
+
+                <!-- Network Forensics -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Network Forensics</h3>
+                    <p>Analysis of network traffic to identify malicious communications, data exfiltration, and command & control activities.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>Data Exfiltration Analysis</li>
+                            <li>C2 Communication Detection</li>
+                            <li>DDoS Attack Investigation</li>
+                            <li>DNS Tunneling Detection</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/network/" class="btn btn-primary">View Analysis</a>
+                </div>
+
+                <!-- Disk Forensics -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-hdd"></i>
+                    </div>
+                    <h3>Disk Forensics</h3>
+                    <p>Analysis of storage media to recover deleted files, identify malicious artifacts, and establish timelines using EnCase and FTK.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>Deleted File Recovery</li>
+                            <li>Timeline Analysis</li>
+                            <li>Malware Artifact Analysis</li>
+                            <li>File System Analysis</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/disk/" class="btn btn-primary">View Analysis</a>
+                </div>
+
+                <!-- Mobile Forensics -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Forensics</h3>
+                    <p>Analysis of mobile devices to extract evidence, identify suspicious activities, and recover deleted data using Cellebrite and Oxygen.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>iOS Device Analysis</li>
+                            <li>Android Malware Detection</li>
+                            <li>Mobile App Forensics</li>
+                            <li>SIM Card Analysis</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/mobile/" class="btn btn-primary">View Analysis</a>
+                </div>
+
+                <!-- Cloud Forensics -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Forensics</h3>
+                    <p>Analysis of cloud environments to investigate security incidents, data breaches, and unauthorized access across AWS, Azure, and GCP.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>AWS Security Incident</li>
+                            <li>Azure Data Breach</li>
+                            <li>GCP Access Analysis</li>
+                            <li>Cloud Storage Forensics</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/cloud/" class="btn btn-primary">View Analysis</a>
+                </div>
+
+                <!-- Malware Analysis -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Malware Analysis</h3>
+                    <p>Static and dynamic analysis of malicious software to understand behavior, capabilities, and indicators of compromise.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>Ransomware Analysis</li>
+                            <li>Trojan Detection</li>
+                            <li>Spyware Investigation</li>
+                            <li>Polymorphic Malware</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/malware/" class="btn btn-primary">View Analysis</a>
+                </div>
+
+                <!-- Email Forensics -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Forensics</h3>
+                    <p>Analysis of email headers, attachments, and metadata to trace phishing attacks and email-based threats.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>Phishing Email Analysis</li>
+                            <li>BEC Attack Investigation</li>
+                            <li>Email Header Analysis</li>
+                            <li>Attachment Forensics</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/email/" class="btn btn-primary">View Analysis</a>
+                </div>
+
+                <!-- Database Forensics -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Database Forensics</h3>
+                    <p>Analysis of database systems to investigate data breaches, unauthorized access, and data manipulation incidents.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>SQL Injection Analysis</li>
+                            <li>Data Exfiltration Investigation</li>
+                            <li>Database Log Analysis</li>
+                            <li>Access Control Audit</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/database/" class="btn btn-primary">View Analysis</a>
+                </div>
+
+                <!-- IoT Forensics -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>IoT Forensics</h3>
+                    <p>Analysis of Internet of Things devices to investigate security incidents and extract digital evidence from smart devices.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>Smart Home Device Analysis</li>
+                            <li>Industrial IoT Investigation</li>
+                            <li>Wearable Device Forensics</li>
+                            <li>IoT Network Analysis</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/iot/" class="btn btn-primary">View Analysis</a>
+                </div>
+
+                <!-- Social Media Forensics -->
+                <div class="forensic-card">
+                    <div class="forensic-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3>Social Media Forensics</h3>
+                    <p>Analysis of social media platforms to investigate cyberbullying, harassment, and digital evidence preservation.</p>
+                    <div class="case-studies">
+                        <h4>Case Studies:</h4>
+                        <ul>
+                            <li>Social Media Harassment</li>
+                            <li>Digital Evidence Preservation</li>
+                            <li>Platform Analysis</li>
+                            <li>Metadata Extraction</li>
+                        </ul>
+                    </div>
+                    <a href="forensics/social-media/" class="btn btn-primary">View Analysis</a>
+                </div>
             </div>
-            <div class="tab-content">
-                <div id="timeline" class="tab-pane active">
-                    <div class="timeline-container" id="timelineContainer">
-                        <!-- Timeline events will be populated here -->
+        </div>
+    </section>
+
+    <!-- Lessons Learned Section -->
+    <section class="lessons-section">
+        <div class="container">
+            <h2><i class="fas fa-graduation-cap"></i> Lessons Learned</h2>
+            <p class="section-intro">Real-world incident response lessons and best practices from actual cybersecurity incidents and industry frameworks.</p>
+            
+            <div class="lessons-grid">
+                <!-- SolarWinds Incident -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>SolarWinds Supply Chain Attack</h3>
+                        <span class="year">2020</span>
                     </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement software bill of materials (SBOM)</li>
+                            <li>Enhance supply chain security monitoring</li>
+                            <li>Establish zero-trust architecture</li>
+                            <li>Improve incident response coordination</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>18,000+ organizations affected, leading to enhanced supply chain security practices.</p>
+                    </div>
+                    <a href="lessons/solarwinds/" class="btn btn-primary">Read Full Analysis</a>
                 </div>
-                <div id="evidence" class="tab-pane">
-                    <div class="evidence-container">
-                        <h4>Evidence Collection</h4>
-                        <div class="evidence-list" id="evidenceList">
-                            <!-- Evidence items will be populated here -->
-                        </div>
+
+                <!-- Colonial Pipeline Ransomware -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>Colonial Pipeline Ransomware</h3>
+                        <span class="year">2021</span>
                     </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement network segmentation</li>
+                            <li>Enhance backup and recovery procedures</li>
+                            <li>Improve OT/IT security integration</li>
+                            <li>Establish ransomware response protocols</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>Fuel supply disruption across US East Coast, leading to enhanced critical infrastructure security.</p>
+                    </div>
+                    <a href="lessons/colonial-pipeline/" class="btn btn-primary">Read Full Analysis</a>
                 </div>
-                <div id="correlation" class="tab-pane">
-                    <div class="correlation-container">
-                        <h4>Related Events</h4>
-                        <div class="correlation-list" id="correlationList">
-                            <!-- Correlated events will be populated here -->
-                        </div>
+
+                <!-- Log4j Vulnerability -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>Log4j Vulnerability (Log4Shell)</h3>
+                        <span class="year">2021</span>
                     </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement vulnerability management programs</li>
+                            <li>Enhance dependency scanning</li>
+                            <li>Improve patch management processes</li>
+                            <li>Establish zero-day response procedures</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>Millions of systems vulnerable, leading to improved vulnerability management practices.</p>
+                    </div>
+                    <a href="lessons/log4j/" class="btn btn-primary">Read Full Analysis</a>
                 </div>
-                <div id="notes" class="tab-pane">
-                    <div class="notes-container">
-                        <h4>Investigation Notes</h4>
-                        <textarea id="investigationNotes" placeholder="Add investigation notes here..."></textarea>
-                        <button class="btn btn-primary" id="saveNotes">Save Notes</button>
+
+                <!-- Microsoft Exchange Attacks -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>Microsoft Exchange Server Attacks</h3>
+                        <span class="year">2021</span>
                     </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement email security best practices</li>
+                            <li>Enhance server hardening procedures</li>
+                            <li>Improve threat intelligence sharing</li>
+                            <li>Establish rapid response capabilities</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>Thousands of organizations compromised, leading to enhanced email security practices.</p>
+                    </div>
+                    <a href="lessons/exchange-attacks/" class="btn btn-primary">Read Full Analysis</a>
+                </div>
+
+                <!-- Kaseya Ransomware -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>Kaseya VSA Ransomware</h3>
+                        <span class="year">2021</span>
+                    </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement vendor security assessments</li>
+                            <li>Enhance MSP security practices</li>
+                            <li>Improve supply chain risk management</li>
+                            <li>Establish vendor incident response procedures</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>1,500+ businesses affected, leading to enhanced MSP security requirements.</p>
+                    </div>
+                    <a href="lessons/kaseya/" class="btn btn-primary">Read Full Analysis</a>
+                </div>
+
+                <!-- Uber Data Breach -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>Uber Data Breach</h3>
+                        <span class="year">2022</span>
+                    </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement multi-factor authentication</li>
+                            <li>Enhance access control procedures</li>
+                            <li>Improve insider threat detection</li>
+                            <li>Establish data breach notification protocols</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>57 million user records compromised, leading to enhanced data protection practices.</p>
+                    </div>
+                    <a href="lessons/uber/" class="btn btn-primary">Read Full Analysis</a>
+                </div>
+
+                <!-- LastPass Data Breach -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>LastPass Data Breach</h3>
+                        <span class="year">2022</span>
+                    </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement secure development practices</li>
+                            <li>Enhance source code protection</li>
+                            <li>Improve vendor security assessments</li>
+                            <li>Establish secure coding standards</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>Password manager compromise affecting millions of users, leading to enhanced security practices.</p>
+                    </div>
+                    <a href="lessons/lastpass/" class="btn btn-primary">Read Full Analysis</a>
+                </div>
+
+                <!-- MOVEit Transfer Vulnerability -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>MOVEit Transfer Vulnerability</h3>
+                        <span class="year">2023</span>
+                    </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement file transfer security</li>
+                            <li>Enhance vulnerability scanning</li>
+                            <li>Improve patch management</li>
+                            <li>Establish secure file sharing protocols</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>Thousands of organizations affected, leading to enhanced file transfer security practices.</p>
+                    </div>
+                    <a href="lessons/moveit/" class="btn btn-primary">Read Full Analysis</a>
+                </div>
+
+                <!-- 23andMe Data Breach -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>23andMe Data Breach</h3>
+                        <span class="year">2023</span>
+                    </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement API security best practices</li>
+                            <li>Enhance credential stuffing protection</li>
+                            <li>Improve data privacy controls</li>
+                            <li>Establish genetic data protection</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>Genetic data of millions compromised, leading to enhanced privacy protection measures.</p>
+                    </div>
+                    <a href="lessons/23andme/" class="btn btn-primary">Read Full Analysis</a>
+                </div>
+
+                <!-- Okta Identity Breach -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>Okta Identity Breach</h3>
+                        <span class="year">2022</span>
+                    </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement identity security controls</li>
+                            <li>Enhance access management</li>
+                            <li>Improve vendor security monitoring</li>
+                            <li>Establish identity protection protocols</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>Identity provider compromise affecting thousands of organizations, leading to enhanced identity security.</p>
+                    </div>
+                    <a href="lessons/okta/" class="btn btn-primary">Read Full Analysis</a>
+                </div>
+
+                <!-- NIST Cybersecurity Framework -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>NIST Cybersecurity Framework</h3>
+                        <span class="year">Ongoing</span>
+                    </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement Identify, Protect, Detect, Respond, Recover</li>
+                            <li>Enhance risk management practices</li>
+                            <li>Improve security governance</li>
+                            <li>Establish continuous improvement</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>Industry standard framework adopted by thousands of organizations worldwide.</p>
+                    </div>
+                    <a href="lessons/nist/" class="btn btn-primary">Read Full Analysis</a>
+                </div>
+
+                <!-- MITRE ATT&CK Framework -->
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h3>MITRE ATT&CK Framework</h3>
+                        <span class="year">Ongoing</span>
+                    </div>
+                    <div class="lesson-content">
+                        <h4>Key Lessons:</h4>
+                        <ul>
+                            <li>Implement threat modeling</li>
+                            <li>Enhance threat detection</li>
+                            <li>Improve attack simulation</li>
+                            <li>Establish threat intelligence</li>
+                        </ul>
+                        <h4>Impact:</h4>
+                        <p>Comprehensive threat knowledge base used by security teams globally.</p>
+                    </div>
+                    <a href="lessons/mitre/" class="btn btn-primary">Read Full Analysis</a>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -264,7 +842,7 @@
                     <ul>
                         <li><a href="../tools/">Security Tools</a></li>
                         <li><a href="../policies/">Policies</a></li>
-                        <li><a href="index.html">SIEM Dashboard</a></li>
+                        <li><a href="index.html">Incident Response</a></li>
                         <li><a href="../exercises/">Exercises</a></li>
                     </ul>
                 </div>
@@ -293,6 +871,5 @@
     </footer>
 
     <script src="../../js/script.js"></script>
-    <script src="js/siem.js"></script>
 </body>
 </html> 
