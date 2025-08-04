@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberTech Solutions Enterprise Security - SIEM Dashboard</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../css/security.css">
+    <link rel="stylesheet" href="css/siem.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../../../images/logo.svg" alt="CyberTech Solutions" class="logo">
+                <span class="logo-text">CyberTech Solutions</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../index.html#services">Services</a></li>
+                <li><a href="../../../index.html#about">About</a></li>
+                <li><a href="../../../index.html#careers">Careers</a></li>
+                <li><a href="../../../index.html#contact">Contact</a></li>
+                <li><a href="../../index.html" class="security-link">Security</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SIEM Header -->
+    <section class="siem-header">
+        <div class="container">
+            <div class="siem-header-content">
+                <h1><i class="fas fa-shield-alt"></i> CyberTech Solutions Enterprise Security</h1>
+                <p>Advanced Security Information and Event Management (SIEM) platform for comprehensive threat detection, incident response, and security monitoring.</p>
+                <div class="siem-status">
+                    <span class="status-indicator online"></span>
+                    <span>Enterprise Security Online - Real-time Monitoring Active</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIEM Dashboard -->
+    <section class="siem-dashboard">
+        <div class="container">
+            <!-- Dashboard Controls -->
+            <div class="dashboard-controls">
+                <div class="control-group">
+                    <label for="timeRange">Time Range:</label>
+                    <select id="timeRange">
+                        <option value="1h">Last Hour</option>
+                        <option value="24h" selected>Last 24 Hours</option>
+                        <option value="7d">Last 7 Days</option>
+                        <option value="30d">Last 30 Days</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="severityFilter">Severity:</label>
+                    <select id="severityFilter">
+                        <option value="all">All Severities</option>
+                        <option value="critical">Critical</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <button id="refreshBtn" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Security Metrics -->
+                <div class="dashboard-card metrics-card">
+                    <h3><i class="fas fa-chart-line"></i> Security Metrics</h3>
+                    <div class="metrics-grid">
+                        <div class="metric">
+                            <div class="metric-value" id="totalEvents">0</div>
+                            <div class="metric-label">Total Events</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value critical" id="criticalAlerts">0</div>
+                            <div class="metric-label">Critical Alerts</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value high" id="highAlerts">0</div>
+                            <div class="metric-label">High Alerts</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value" id="blockedThreats">0</div>
+                            <div class="metric-label">Blocked Threats</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Activity Chart -->
+                <div class="dashboard-card chart-card">
+                    <h3><i class="fas fa-chart-area"></i> Real-time Activity</h3>
+                    <canvas id="activityChart" width="400" height="200"></canvas>
+                </div>
+
+                <!-- Threat Intelligence -->
+                <div class="dashboard-card threat-intel">
+                    <h3><i class="fas fa-eye"></i> Threat Intelligence</h3>
+                    <div class="threat-metrics">
+                        <div class="threat-metric">
+                            <span class="threat-label">Active Threats:</span>
+                            <span class="threat-value" id="activeThreats">0</span>
+                        </div>
+                        <div class="threat-metric">
+                            <span class="threat-label">Known IPs:</span>
+                            <span class="threat-value" id="knownIPs">0</span>
+                        </div>
+                        <div class="threat-metric">
+                            <span class="threat-label">Malware Detected:</span>
+                            <span class="threat-value" id="malwareDetected">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="dashboard-card system-status">
+                    <h3><i class="fas fa-server"></i> System Status</h3>
+                    <div class="status-list">
+                        <div class="status-item">
+                            <span class="status-dot online"></span>
+                            <span>Enterprise Security Server</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-dot online"></span>
+                            <span>Log Collectors</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-dot online"></span>
+                            <span>Detection Engine</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-dot online"></span>
+                            <span>Alert System</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Log Search and Analysis -->
+            <div class="search-section">
+                <div class="search-header">
+                    <h3><i class="fas fa-search"></i> Log Search & Analysis</h3>
+                    <div class="search-controls">
+                        <input type="text" id="searchQuery" placeholder="Search logs (e.g., source=firewall, severity=high)" />
+                        <button id="searchBtn" class="btn btn-primary">Search</button>
+                        <button id="advancedSearchBtn" class="btn btn-secondary">Advanced</button>
+                    </div>
+                </div>
+                
+                <div class="search-results">
+                    <div class="results-header">
+                        <span>Search Results</span>
+                        <span id="resultCount">0 results</span>
+                    </div>
+                    <div class="log-table-container">
+                        <table class="log-table" id="logTable">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Source</th>
+                                    <th>Event Type</th>
+                                    <th>Severity</th>
+                                    <th>Message</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logTableBody">
+                                <!-- Log entries will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Alerts -->
+            <div class="alerts-section">
+                <h3><i class="fas fa-exclamation-triangle"></i> Active Alerts</h3>
+                <div class="alerts-container" id="alertsContainer">
+                    <!-- Alerts will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investigation Panel (Hidden by default) -->
+    <div class="investigation-panel" id="investigationPanel">
+        <div class="panel-header">
+            <h3><i class="fas fa-search-plus"></i> Incident Investigation</h3>
+            <button class="close-panel" id="closePanel">&times;</button>
+        </div>
+        <div class="panel-content">
+            <div class="investigation-tabs">
+                <button class="tab-btn active" data-tab="timeline">Timeline</button>
+                <button class="tab-btn" data-tab="evidence">Evidence</button>
+                <button class="tab-btn" data-tab="correlation">Correlation</button>
+                <button class="tab-btn" data-tab="notes">Notes</button>
+            </div>
+            <div class="tab-content">
+                <div id="timeline" class="tab-pane active">
+                    <div class="timeline-container" id="timelineContainer">
+                        <!-- Timeline events will be populated here -->
+                    </div>
+                </div>
+                <div id="evidence" class="tab-pane">
+                    <div class="evidence-container">
+                        <h4>Evidence Collection</h4>
+                        <div class="evidence-list" id="evidenceList">
+                            <!-- Evidence items will be populated here -->
+                        </div>
+                    </div>
+                </div>
+                <div id="correlation" class="tab-pane">
+                    <div class="correlation-container">
+                        <h4>Related Events</h4>
+                        <div class="correlation-list" id="correlationList">
+                            <!-- Correlated events will be populated here -->
+                        </div>
+                    </div>
+                </div>
+                <div id="notes" class="tab-pane">
+                    <div class="notes-container">
+                        <h4>Investigation Notes</h4>
+                        <textarea id="investigationNotes" placeholder="Add investigation notes here..."></textarea>
+                        <button class="btn btn-primary" id="saveNotes">Save Notes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>CyberTech Solutions</h4>
+                    <p>Transforming business through innovative technology solutions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Security</h4>
+                    <ul>
+                        <li><a href="../index.html">Security Tools</a></li>
+                        <li><a href="../../policies/">Policies</a></li>
+                        <li><a href="../../incidents/">Incidents</a></li>
+                        <li><a href="../../exercises/">Exercises</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../../../index.html#about">About Us</a></li>
+                        <li><a href="../../../index.html#careers">Careers</a></li>
+                        <li><a href="../../../index.html#contact">Contact</a></li>
+                        <li><a href="../../../index.html">Home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CyberTech Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../js/script.js"></script>
+    <script src="js/siem.js"></script>
+</body>
+</html> 
